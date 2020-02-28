@@ -21,10 +21,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        backgroundImageViewSetup()
         clockLabelSetup()
         startButtonSetup()
         resetButtonSetup()
-        backgroundImageViewSetup()
+        
     }
     
     func resetButtonSetup(){
@@ -39,11 +40,13 @@ class ViewController: UIViewController {
         resetButton.setTitle("Reset", for: .normal)
         resetButton.clipsToBounds = true
         resetButton.addTarget(self, action: #selector(resetButtonClicked), for: .touchUpInside)
+        resetButton.isHidden = true
     }
     
     @objc func resetButtonClicked(){
         clockLabel.text = "00:00.0"
         stopwatch.stop()
+        resetButton.isHidden = true
     }
     
     func startButtonSetup(){
@@ -67,7 +70,7 @@ class ViewController: UIViewController {
             startButton.setTitle("Stop", for: .normal)
             startButton.backgroundColor = #colorLiteral(red: 0.3176470697, green: 0.07450980693, blue: 0.02745098062, alpha: 1)
             startButton.setTitleColor(#colorLiteral(red: 0.9928815038, green: 0.1237051785, blue: 0.1051128647, alpha: 1), for: .normal)
-            
+            resetButton.isHidden = false
             stopwatch.start()
             timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
             
@@ -103,12 +106,12 @@ class ViewController: UIViewController {
     
     func backgroundImageViewSetup(){
         view.addSubview(backgroundImageView)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        //backgroundImageView.image =
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        backgroundImageView.image = #imageLiteral(resourceName: "back")
     }
 
 
